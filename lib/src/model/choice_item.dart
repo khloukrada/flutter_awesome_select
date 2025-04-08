@@ -68,6 +68,7 @@ class S2Choice<T> with Diagnosticable {
     S2OptionProp<E, dynamic>? meta,
     S2OptionProp<E, S2ChoiceStyle>? style,
     S2OptionProp<E, S2ChoiceStyle>? activeStyle,
+    S2OptionProp<E, bool>? selected,
   }) =>
       source
           .asMap()
@@ -83,6 +84,7 @@ class S2Choice<T> with Diagnosticable {
                 meta: meta?.call(index, item),
                 style: style?.call(index, item),
                 activeStyle: activeStyle?.call(index, item),
+                selected: selected?.call(index, item) ?? false,
               )))
           .values
           .toList();
