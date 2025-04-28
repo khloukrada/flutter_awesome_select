@@ -300,6 +300,8 @@ class S2SingleSelected<T> extends S2Selected<T> with S2SingleChosenData<T> {
 
   S2Choice<T>? _choice;
 
+  bool _disposed = false;
+
   /// a `String` to return in `toString` if the `title` is empty
   @override
   final String? placeholder;
@@ -370,6 +372,19 @@ class S2SingleSelected<T> extends S2Selected<T> with S2SingleChosenData<T> {
         : isValid == true
             ? title ?? placeholder ?? 'Select one'
             : error;
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
+
+  @override
+  void notifyListeners() {
+    if (!_disposed) {
+      super.notifyListeners();
+    }
   }
 }
 
